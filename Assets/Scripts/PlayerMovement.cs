@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Creates an invisible sphere below the player in which checks whats below it.
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
