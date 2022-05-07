@@ -10,6 +10,7 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
+        //Locks the Cursor so that user cannot see it
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -21,7 +22,7 @@ public class MouseLook : MonoBehaviour
 
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Makes it so that the user cannot look up / down beyond a certain point
 
         playerBody.Rotate(Vector3.up * mouseX);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
