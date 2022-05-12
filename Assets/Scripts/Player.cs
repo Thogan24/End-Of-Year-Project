@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     public CharacterController controller;
 
+    public int playerHealth = 20;
+    public int playerDamage = 1;
+    public GameObject Enemy;
+    public GameObject particleEffects;
+    public GameObject player;
+
+
+    // Movement Variable
     public float speed = 30f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
-
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -42,5 +49,31 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime); // We multiply by 2 cause the formula is delta y = 1/2g * t^2
+
+
+
+        if (transform.GetComponent<Collider>().bounds.Intersects(Enemy.GetComponent<Collider>().bounds))
+        {
+            //particleEffects.SetActive(true);
+            DamagePlayer();
+        } else
+        {
+            //particleEffects.SetActive(false);
+        }
+        if (transform.GetChild(3).GetComponent<Collider>().bounds.Intersects(Enemy.GetComponent<Collider>().bounds)){
+            particleEffects.SetActive(true);
+        }
+        else
+        {
+            particleEffects.SetActive(false);
+        }
     }
+
+    void DamagePlayer()
+    {
+        Debug.Log(playerHealth);
+        playerHealth--;
+    }
+
+
 }

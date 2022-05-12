@@ -8,6 +8,11 @@ public class PauseMenu1 : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject optionsMenuUI;
 
+    private void Start()
+    {
+        ResumeGame();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -16,10 +21,12 @@ public class PauseMenu1 : MonoBehaviour
             if (GameIsPaused)
             {
                 ResumeGame(); // Mouse does not lock back with the game because Escape key is being pressed which unity automatically unlocks the cursor
+                Debug.Log(Cursor.visible);
             }
             else
             {
                 PauseGame();
+                Debug.Log(Cursor.visible);
             }
         }
     }
@@ -30,6 +37,7 @@ public class PauseMenu1 : MonoBehaviour
         optionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameIsPaused = false;
     }
 
@@ -39,6 +47,7 @@ public class PauseMenu1 : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameIsPaused = true;
     }
 
@@ -60,8 +69,10 @@ public class PauseMenu1 : MonoBehaviour
     {
         // Quits to main menu
         Debug.Log("Quitting to main menu...");
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    
+
+
 }
